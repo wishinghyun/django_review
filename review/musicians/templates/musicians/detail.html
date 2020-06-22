@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Musician</h1>
+  <hr>
+  <!-- musician은 결국 인스턴스다 -->
+  <h1>{{ musician }}</h1>
+  <hr>
+  <!-- 각 변수에 접근 할 수 있다 -->
+  <h2>앨범 목록</h2>
+  <ul>
+  {% for album in albums %}
+    <li>{{ album }}</li>
+  {% endfor %}
+  </ul>
+  <hr>
+  <div style="display: inline-block; width: 300px;">
+    <button><a href="{% url 'musicians:update' musician.pk %}" style="float: left;">수정</a></button>
+    <button><a href="{% url 'musicians:index' %}" style="float: left;">목록보기</a></button>
+    <form action="{% url 'musicians:delete' musician.pk %}" method="POST" style="float: right;">
+      {% csrf_token %}
+      <input type="submit" value="삭제">
+    </form>
+  </div>
+</body>
+</html>
